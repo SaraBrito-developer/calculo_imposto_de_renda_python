@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+import unittest
+from calculo_salario import CalculoDaAliquota
+
+class TestCalculoAliquota(unittest.TestCase):
+
+    def test_faixa_isenta(self):
+        """Testa a faixa 1 (isenta)"""
+        self.assertEqual(CalculoDaAliquota(1900.00), 0.0)
+
+    def test_faixa_1(self):
+        """Testa a faixa 2 (7.5%)"""
+        self.assertEqual(CalculoDaAliquota(2000.00), 0.075)
+
+    def test_limite_faixa_1(self):
+        """Testa o limite exato da faixa 2 (7.5%)"""
+        self.assertEqual(CalculoDaAliquota(2826.65), 0.075)
+
+    def test_O_BUG_DO_BURACO(self):
+        """
+        Testa o valor '2826.60'
+        """
+        # O código melhorado deve retornar 0.075
+        self.assertEqual(CalculoDaAliquota(2826.60), 0.075) 
+
+    def test_faixa_2(self):
+        """Testa a faixa 3 (15%)"""
+        self.assertEqual(CalculoDaAliquota(3000.00), 0.15)
+
+    def test_faixa_3(self):
+        """Testa a faixa 4 (22.5%)"""
+        # Assumindo a correção de 0.22 para 0.225
+        self.assertEqual(CalculoDaAliquota(4000.00), 0.225) 
+
+    def test_faixa_4(self):
+        """Testa a faixa 5 (27.5%)"""
+        # Assumindo a correção de 0.27 para 0.275
+        self.assertEqual(CalculoDaAliquota(5000.00), 0.275)
+
+if __name__ == '__main__':
+    unittest.main()
